@@ -18,7 +18,7 @@ async function main() {
   console.log(
     `EncryptHashVerifier.sol deployed to ${encryptVerifier.address}. Time: ${Date.now()}`
   );
-  envContents = `${envContents}VITE_ENCRYPT_VERIFIER_ADDRESS=${encryptVerifier.address}\n`;
+  envContents = `${envContents}ENCRYPT_VERIFIER_ADDRESS=${encryptVerifier.address}\n`;
 
   // deploy the decrypt verifier
   const DecryptVerifier = await ethers.getContractFactory("contracts/DecryptVerifier.sol:Verifier");
@@ -27,7 +27,7 @@ async function main() {
   console.log(
     `DecryptVerifier.sol deployed to ${decryptVerifier.address}. Time: ${Date.now()}`
   );
-  envContents = `${envContents}VITE_DECRYPT_VERIFIER_ADDRESS=${decryptVerifier.address}\n`;
+  envContents = `${envContents}DECRYPT_VERIFIER_ADDRESS=${decryptVerifier.address}\n`;
 
   // deploy the key aggregate verifier
   const KeyAggregateVerifier = await ethers.getContractFactory("contracts/KeyAggregateVerifier.sol:Verifier");
@@ -36,7 +36,7 @@ async function main() {
   console.log(
     `KeyAggregateVerifier.sol deployed to ${keyAggregateVerifier.address}. Time: ${Date.now()}`
   );
-  envContents = `${envContents}VITE_KEY_AGGREGATE_VERIFIER_ADDRESS=${keyAggregateVerifier.address}\n`;
+  envContents = `${envContents}KEY_AGGREGATE_VERIFIER_ADDRESS=${keyAggregateVerifier.address}\n`;
 
   // deploy the main contract
   const MentalPoker = await ethers.getContractFactory("MentalPoker");
@@ -49,7 +49,7 @@ async function main() {
   console.log(
     `MentalPoker.sol deployed to ${mentalPoker.address}. Time: ${Date.now()}`
   );
-  envContents = `${envContents}VITE_MENTAL_POKER_ADDRESS=${mentalPoker.address}\n`;
+  envContents = `${envContents}MENTAL_POKER_ADDRESS=${mentalPoker.address}\n`;
   console.log(`run npx hardhat verify --network ${network.name} ${mentalPoker.address} ${keyAggregateVerifier.address} ${encryptVerifier.address} ${decryptVerifier.address}`)
   fs.writeFileSync('.env', envContents);
 }
