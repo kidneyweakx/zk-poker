@@ -7,14 +7,23 @@
   "scripts": {
     "circom:dev": "hardhat circom --deterministic --debug --verbose",
     "circom:prod": "hardhat circom --verbose",
+    "deploy": "hardhat run --network localhost scripts/deploy.ts",
+    "deploy:mumbai": "hardhat run --network mumbai scripts/deploy.ts",
+    "verify:mumbai": "hardhat run --network mumbai scripts/verify.ts",
     "test": "hardhat test"
   },
   "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^2.0.1",
+    "@nomiclabs/hardhat-ethers": "^2.2.2",
+    "@nomiclabs/hardhat-etherscan": "^3.1.5",
+    "@typechain/ethers-v5": "^10.2.0",
     "@types/chai": "^4.3.4",
     "@types/mocha": "^10.0.1",
     "chai": "^4.3.7",
     "circomlib": "^2.0.5",
     "circomlibjs": "^0.1.7",
+    "dotenv": "^16.0.3",
+    "ethers": "^5.7.2",
     "hardhat": "^2.12.6",
     "hardhat-circom": "^3.3.2",
     "ts-node": "^10.9.1",

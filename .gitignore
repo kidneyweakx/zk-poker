@@ -4,6 +4,7 @@ node_modules/
 # hardhat
 cache
 artifacts
+typechain-types
 
 # Ignore the output from circom because we want people to build these
 # Users can remove these lines and commit the artifacts
@@ -11,4 +12,6 @@ circuits/*.r1cs
 circuits/*.vkey.json
 circuits/*.wasm
 circuits/*.zkey
-contracts/*.sol
+# contracts/*Verifier.sol
+
+.env
