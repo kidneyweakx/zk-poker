@@ -32,7 +32,7 @@ const config: HardhatUserConfig = {
     ptau: "https://hermezptau.blob.core.windows.net/ptau/powersOfTau28_hez_final_18.ptau",
     circuits: [
       { name: "key_aggregate" },
-      { name: "encrypt_hash" },
+      { name: "encrypt" },
       { name: "decrypt" }
     ],
   },

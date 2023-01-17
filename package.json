@@ -10,6 +10,7 @@
     "deploy": "hardhat run --network localhost scripts/deploy.ts",
     "deploy:mumbai": "hardhat run --network mumbai scripts/deploy.ts",
     "verify:mumbai": "hardhat run --network mumbai scripts/verify.ts",
+    "frontend:dev": "cd frontend && npm run dev",
     "test": "hardhat test"
   },
   "devDependencies": {

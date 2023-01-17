@@ -3,7 +3,6 @@ import { config as dotEnvConfig } from "dotenv";
 import fs from "fs";
 
 async function main() {
-  console.log(network.name);
   // mirror root .env into generated frontend .env
   const { parsed: rootEnv} = dotEnvConfig();
   let envContents = "";
@@ -16,9 +15,9 @@ async function main() {
   const encryptVerifier = await EncryptVerifier.deploy();
   await encryptVerifier.deployed();
   console.log(
-    `EncryptHashVerifier.sol deployed to ${encryptVerifier.address}. Time: ${Date.now()}`
+    `EncryptVerifier.sol deployed to ${encryptVerifier.address}. Time: ${Date.now()}`
   );
-  envContents = `${envContents}ENCRYPT_VERIFIER_ADDRESS=${encryptVerifier.address}\n`;
+  envContents = `${envContents}VITE_ENCRYPT_VERIFIER_ADDRESS=${encryptVerifier.address}\n`;
 
   // deploy the decrypt verifier
   const DecryptVerifier = await ethers.getContractFactory("contracts/DecryptVerifier.sol:Verifier");
@@ -27,7 +26,7 @@ async function main() {
   console.log(
     `DecryptVerifier.sol deployed to ${decryptVerifier.address}. Time: ${Date.now()}`
   );
-  envContents = `${envContents}DECRYPT_VERIFIER_ADDRESS=${decryptVerifier.address}\n`;
+  envContents = `${envContents}VITE_DECRYPT_VERIFIER_ADDRESS=${decryptVerifier.address}\n`;
 
   // deploy the key aggregate verifier
   const KeyAggregateVerifier = await ethers.getContractFactory("contracts/KeyAggregateVerifier.sol:Verifier");
@@ -36,7 +35,7 @@ async function main() {
   console.log(
     `KeyAggregateVerifier.sol deployed to ${keyAggregateVerifier.address}. Time: ${Date.now()}`
   );
-  envContents = `${envContents}KEY_AGGREGATE_VERIFIER_ADDRESS=${keyAggregateVerifier.address}\n`;
+  envContents = `${envContents}VITE_KEY_AGGREGATE_VERIFIER_ADDRESS=${keyAggregateVerifier.address}\n`;
 
   // deploy the main contract
   const MentalPoker = await ethers.getContractFactory("MentalPoker");
@@ -49,9 +48,11 @@ async function main() {
   console.log(
     `MentalPoker.sol deployed to ${mentalPoker.address}. Time: ${Date.now()}`
   );
-  envContents = `${envContents}MENTAL_POKER_ADDRESS=${mentalPoker.address}\n`;
+  envContents = `${envContents}VITE_MENTAL_POKER_ADDRESS=${mentalPoker.address}\n`;
+
+  // fs.writeFileSync('.env', envContents);
+  fs.writeFileSync('frontend/.env', envContents);
   console.log(`run npx hardhat verify --network ${network.name} ${mentalPoker.address} ${keyAggregateVerifier.address} ${encryptVerifier.address} ${decryptVerifier.address}`)
-  fs.writeFileSync('.env', envContents);
 }
 
 // We recommend this pattern to be able to use async/await everywhere
